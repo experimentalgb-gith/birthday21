@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shraddha's Special Website</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Video Background -->
+  <div class="video-wrapper">
+    <video autoplay muted loop id="bg-video">
+      <source src="bg-video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <!-- Password Screen -->
+  <div id="login-screen" class="page">
+    <h1>Enter Secret Code 💖</h1>
+    <input type="password" id="password" placeholder="Enter code">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+    <div id="login-error"></div>
+  </div>
+
+  <!-- All Pages Container -->
+  <div id="card-container" style="display:none;">
+
+    <!-- 1. Wishes Page -->
+    <div class="page" id="wishes-page">
+      <h1 id="wish-text">💌 Click Next for a Surprise!</h1>
+      <div class="nav">
+        <button onclick="nextWish()">Next ➡️</button>
+      </div>
+    </div>
+
+    <!-- 2. Happy Birthday Page -->
+    <div class="page" id="birthday-page">
+      <h1>🎂 Happy Birthday Shraddha 🎂</h1>
+      <p>Wishing you the happiest birthday ever! 🎉</p>
+      <div class="nav">
+        <button onclick="showPage('guitar-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <!-- 3. Guitar Happy Birthday Page -->
+    <div class="page" id="guitar-page">
+      <h1>🎸 My Guitar Version 🎶</h1>
+      <p>I recorded this special Happy Birthday song just for you! Hope you love it 💕</p>
+      <div class="audio-container">
+        <audio id="guitar-audio" controls>
+          <source src="guitar-hbd.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+        </audio>
+      </div>
+      <div class="nav">
+        <button onclick="playAudio()">▶️ Play</button>
+        <button onclick="pauseAudio()">⏸️ Pause</button>
+        <button onclick="showPage('note-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <!-- 4. Note Page -->
+    <div class="page" id="note-page">
+      <h1>💭 A Small Note</h1>
+      <p class="heartfelt-note">You are truly the most special person to me. Your smile brightens my day, and your presence makes everything better. Thank you for being you! 💖</p>
+      <div class="nav">
+        <button onclick="showPage('movies-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <!-- 5. Movies + Certificate Page -->
+    <div class="page" id="movies-page">
+      <h1>🍿 Movies & 🎓 Certificate</h1>
+      <p>I've prepared some special content for you!</p>
+      <div class="movie-cert-container">
+        <div class="movie-card" onclick="openMovie('english.mkv')">
+          <img src="background.png" alt="English Movie">
+          <p>🎬 English Movie</p>
+        </div>
+        <div class="movie-card" onclick="openMovie('hindi.mkv')">
+          <img src="background.png" alt="Hindi Movie">
+          <p>🎬 Hindi Movie</p>
+        </div>
+        <div class="movie-card" onclick="openCertificate()">
+          <img src="background.png" alt="Certificate">
+          <p>📜 Certificate</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button onclick="showPage('tracker-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <!-- 6. GATE Tracker Page -->
+    <div class="page tracker-page" id="tracker-page">
+      <h1>📚 GATE 2025 Tracker</h1>
+      <p>Track your preparation progress for GATE 2025!</p>
+      
+      <div class="tracker-main">
+        <div id="track-section" class="subjects-grid"></div>
+        
+        <div class="chart-container">
+          <h3>Overall Progress</h3>
+          <canvas id="progressChart" width="250" height="250"></canvas>
+          <div id="progress-stats"></div>
+        </div>
+      </div>
+      
+      <div class="nav">
+        <button onclick="showPage('thanks-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <!-- 7. Thank You & Sorry Page -->
+    <div class="page" id="thanks-page">
+      <div class="thank-sorry-section">
+        <h1 class="animated-title">🙏 Thank You 💕</h1>
+        <p class="fade-text message-text">
+          Thank you for being the most amazing person in my life. Your kindness, your laughter, and your beautiful soul make every day brighter. I'm so grateful to have you! 💖
+        </p>
+      </div>
+
+      <div class="thank-sorry-section">
+        <h1 class="animated-title clickable" id="sorry-reveal">💌 Sorry 💕 <small>(click to reveal)</small></h1>
+        <p class="fade-text message-text hidden" id="sorry-message">
+          I'm truly sorry if I ever hurt you or made you sad, even unintentionally. You mean the world to me, and the last thing I'd want is to cause you pain. Please forgive me for any mistakes. You deserve all the happiness in the world! 🌸
+        </p>
+      </div>
+
+      <div class="final-message">
+        <h2>✨ You are loved ✨</h2>
+        <p>Always and forever 💝</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prayukta's Special Website</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+  
+  <div class="video-wrapper">
+    <video autoplay muted loop id="bg-video">
+      <source src="bg-video.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div id="login-screen" class="page" style="display:block;">
+    <h1>Enter Secret Code ✨</h1>
+    <input type="password" id="password" placeholder="Enter code">
+    <br>
+    <button onclick="checkPassword()">Unlock</button>
+    <div id="login-error"></div>
+  </div>
+
+  <div id="card-container" style="display:none;">
+
+    <div class="page" id="wishes-page">
+      <h1 id="wish-text">💌 Click Next for a Surprise!</h1>
+      <div class="nav">
+        <button onclick="nextWish()">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="birthday-page">
+      <h1>🎂 Happy Birthday Prayukta🎂</h1>
+      <p>Wishing you the happiest birthday ever! 🎉</p>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('guitar-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="guitar-page">
+      <h1>🎸 My Guitar Version 🎶</h1>
+      <p>It is not perfect but I hope you will like it 😊</p>
+      <div class="audio-container">
+        <audio id="guitar-audio" controls>
+          <source src="bday guitar.mp3" type="audio/mpeg">
+        </audio>
+      </div>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="playAudio()">▶️ Play</button>
+        <button onclick="pauseAudio()">⏸️ Pause</button>
+        <button onclick="showPage('cake-cutting-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="cake-cutting-page">
+      <h1>🎂 Cut Your Birthday Cake! 🎂</h1>
+      <p>Click the cake to cut it! 🎉</p>
+      
+      <div class="cake-area">
+        <div id="whole-cake-div">
+          <div class="big-cake" onclick="cutTheCake()">🎂</div>
+          <p style="color: #ff66a3; font-weight: bold; margin-top: 15px;">👆 Click the cake to cut!</p>
+        </div>
+        
+        <div id="cut-result" class="hidden">
+          <div class="pieces">
+            <div class="piece-1">🍰</div>
+            <div class="piece-2">🍰</div>
+          </div>
+          <h2 style="color: #d6336c; margin-top: 30px;">🎉 Happy Birthday Prayukta! 🎉</h2>
+          <p style="color: #555; font-size: 18px;">Wishing you the sweetest year ahead! 💝</p>
+        </div>
+      </div>
+      
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('note-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="note-page">
+      <h1>💌 A Special Letter For You</h1>
+      <p>Click the envelope to read your letter! 💝</p>
+      
+      <div class="envelope-container-main">
+        <div class="envelope-click-area" id="envelope-click-area" onclick="openEnvelopeFixed()">
+          <div class="pink-envelope">
+            <div class="envelope-body-pink">
+              <div class="letter-inside-envelope hidden" id="letter-inside">
+                <h3>To meri sabse jyada helping dost ko,</h3>
+                <p>You’re honestly such an amazing person. Your smile always makes my day brighter, and things just feel better when you’re around. I really appreciate you and everything you do — you make life a lot more fun and meaningful. I’m really lucky to have you as my bestest friend. 😊 😊.</p>
+                <p>Thank you for being the amazing person you are. Your kindness, your laughter, and your beautiful soul bring so much joy into my life.</p>
+                <p>Wishing you all the happiness in the world! 💖</p>
+                <p class="letter-sign">😊✨✨💯💯😊</p>
+              </div>
+            </div>
+            <div class="heart-seal">💖</div>
+          </div>
+          <p class="click-hint" id="env-click-hint">👆 Click to open!</p>
+        </div>
+      </div>
+      
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('movies-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="movies-page">
+      <h1>🍿 Special Movie For You 🍿</h1>
+      <p>I've prepared a special movie for you to watch! 🎬</p>
+      <div class="movie-cert-container">
+        <div class="movie-card" onclick="openArrivalMovie()">
+          <img src="background.png" alt="Arrival Movie">
+          <p>🎬 Arrival Movie</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('giftbox-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="giftbox-page">
+      <h1>🎁 Special Gifts For You</h1>
+      <p>Click each gift to reveal your surprise!</p>
+      <div class="gifts-grid">
+        <div class="gift-box" onclick="openGift(1)">
+          <div class="gift-icon">🎁</div>
+          <p>Gift 1</p>
+        </div>
+        <div class="gift-box" onclick="openGift(2)">
+          <div class="gift-icon">🎁</div>
+          <p>Gift 2</p>
+        </div>
+        <div class="gift-box" onclick="openGift(3)">
+          <div class="gift-icon">🎁</div>
+          <p>Gift 3</p>
+        </div>
+        <div class="gift-box" onclick="openGift(4)">
+          <div class="gift-icon">🎁</div>
+          <p>Gift 4</p>
+        </div>
+      </div>
+      <div id="confetti-container"></div>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('canvas-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="canvas-page">
+      <h1>🎨 Draw Your Birthday Wish</h1>
+      <p>Draw or write something special! It will be saved 💾</p>
+      <div class="canvas-container">
+        <canvas id="drawing-canvas" width="600" height="400"></canvas>
+      </div>
+      <div class="canvas-controls">
+        <button onclick="changeColor('black')">⚫ Black</button>
+        <button onclick="changeColor('red')">🔴 Red</button>
+        <button onclick="changeColor('blue')">🔵 Blue</button>
+        <button onclick="changeColor('green')">🟢 Green</button>
+        <button onclick="changeColor('pink')">🌸 Pink</button>
+        <button onclick="clearCanvas()">🗑️ Clear</button>
+        <button onclick="saveDrawing()">💾 Save</button>
+      </div>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('wishes-jar-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="wishes-jar-page">
+      <h1>🌟 Wishes For Your Future</h1>
+      <div class="jar-container">
+        <div class="wishes-jar">
+          <div class="jar-top"></div>
+          <div class="jar-body">
+            <div class="wish-paper">May you achieve all your GATE dreams! 🎓</div>
+            <div class="wish-paper">May happiness follow you everywhere! 😊</div>
+            <div class="wish-paper">May you always stay this amazing! ✨</div>
+            <div class="wish-paper">May all your wishes come true! 🌟</div>
+            <div class="wish-paper">May success be your best friend! 🏆</div>
+          </div>
+        </div>
+      </div>
+      <p class="wishes-message">These are my wishes for you!</p>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('quiz-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="quiz-page">
+      <h1>🎮 How Well Do You Know Yourself?</h1>
+      <p>A fun quiz just for you!</p>
+      <div class="quiz-container">
+        <div class="quiz-question" id="quiz-q1">
+          <h3>Question 1: How amazing are you?</h3>
+          <button onclick="answerQuiz(1, 'correct')">Extremely Amazing! ✨</button>
+          <button onclick="answerQuiz(1, 'correct')">Super Amazing! 🌟</button>
+          <button onclick="answerQuiz(1, 'correct')">Incredibly Amazing! 💖</button>
+        </div>
+        <div class="quiz-question hidden" id="quiz-q2">
+          <h3>Question 2: How special are you?</h3>
+          <button onclick="answerQuiz(2, 'correct')">Very Special! 💝</button>
+          <button onclick="answerQuiz(2, 'correct')">Extremely Special! ⭐</button>
+          <button onclick="answerQuiz(2, 'correct')">The Most Special! 👑</button>
+        </div>
+        <div class="quiz-question hidden" id="quiz-q3">
+          <h3>Question 3: You are _</h3>
+          <button onclick="answerQuiz(3, 'correct')">You're the best! 🎉</button>
+          <button onclick="answerQuiz(3, 'correct')">You're incredible! 🌈</button>
+          <button onclick="answerQuiz(3, 'correct')">You're awesome! 🚀</button>
+        </div>
+        <div class="quiz-result hidden" id="quiz-result">
+          <h2>🎊 Perfect Score!</h2>
+          <p>You got 3/3 correct! (Because all answers about you are always right! 😄)</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('rating-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="rating-page">
+      <h1>⭐ Rate How Amazing Prayukta✨ Is</h1>
+      <div class="rating-container">
+        <div class="stars" id="stars">
+          <span class="star" onclick="rateStar(1)">⭐</span>
+          <span class="star" onclick="rateStar(2)">⭐</span>
+          <span class="star" onclick="rateStar(3)">⭐</span>
+          <span class="star" onclick="rateStar(4)">⭐</span>
+          <span class="star" onclick="rateStar(5)">⭐</span>
+        </div>
+        <p id="rating-text">Click the stars to rate!</p>
+        <div id="rating-result" class="hidden">
+          <h2>🌟 5/5 Stars!</h2>
+          <p>Perfect rating! Because you deserve nothing less! 💖</p>
+        </div>
+      </div>
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('tracker-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page tracker-page" id="tracker-page">
+      <h1>📚 GATE Tracker</h1>
+      <p>Track your preparation progress! Auto-saves your data 💾</p>
+      
+      <div class="overall-stats">
+        <div class="stat-box">
+          <h3 id="total-progress">0%</h3>
+          <p>Overall Progress</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="completed-topics">0/0</h3>
+          <p>Topics Done</p>
+        </div>
+        <div class="stat-box">
+          <h3 id="subjects-complete">0/12</h3>
+          <p>Subjects 100%</p>
+        </div>
+      </div>
+
+      <div class="tracker-controls">
+        <button onclick="saveProgress()">💾 Save Progress</button>
+        <button onclick="loadProgress()">📂 Load Progress</button>
+        <button onclick="resetTracker()">🔄 Reset All</button>
+      </div>
+      
+      <div class="tracker-main">
+        <div id="track-section" class="subjects-grid"></div>
+        
+        <div class="chart-container">
+          <h3>Progress Chart</h3>
+          <canvas id="progressChart" width="280" height="280"></canvas>
+          <div id="progress-stats"></div>
+        </div>
+      </div>
+      
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('diwali-birthday-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page diwali-birthday-page" id="diwali-birthday-page">
+      <div class="diwali-header">
+        <h1 class="diwali-title">🪔 Happy Diwali & Happy Birthday 🎂</h1>
+        <p class="diwali-subtitle">Double celebration for a doubly best person! ✨</p>
+      </div>
+
+      <div class="diyas-container">
+        <div class="diya">🪔</div>
+        <div class="diya">🪔</div>
+        <div class="diya">🪔</div>
+        <div class="diya">🪔</div>
+        <div class="diya">🪔</div>
+      </div>
+
+      <div class="diwali-birthday-card">
+        <div class="card-content">
+          <h2>🌟 A Rare & Beautiful Combination 🌟</h2>
+          <p class="special-text">
+            How lucky you are to be born on Diwali - the Festival of Lights! Just like Diwali illuminates our homes, 
+            you illuminate the lives of everyone around you with your kindness, warmth, and beautiful smile. 💫
+          </p>
+          <p class="special-text">
+            This day is doubly special because we celebrate not just the victory of light over darkness, 
+            but also the day you brought light into this world! 🎉
+          </p>
+          
+          <div class="wishes-section">
+            <h3>✨ My Special Wishes For You ✨</h3>
+            <ul class="diwali-wishes">
+              <li>🪔 May your life always sparkle like the diyas on Diwali</li>
+              <li>🎂 May every birthday bring you closer to your dreams</li>
+              <li>💫 May you shine bright in everything you do</li>
+              <li>🌸 May happiness and success always follow you</li>
+              <li>🎓 May you ace GATE with flying colors</li>
+              <li>💖 May you always stay this amazing and special</li>
+            </ul>
+          </div>
+
+          <div class="light-lamp-section">
+            <h3>🪔 Light Your Virtual Diya 🪔</h3>
+            <p>Click the diya to light it and make a wish!</p>
+            <div class="big-diya" id="big-diya" onclick="lightDiya()">
+              <div class="diya-body unlit">🪔</div>
+              <div class="diya-flame hidden" id="diya-flame">🔥</div>
+            </div>
+            <p id="diya-message" class="hidden">✨ Your wishes will come true! ✨</p>
+          </div>
+
+          <div class="celebration-button">
+            <button onclick="startCrazyCelebration()" class="celebrate-btn">
+              🎆 Start the Grand Celebration! 🎆
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="fireworks-container"></div>
+      <div id="balloons-container"></div>
+
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('message-bottle-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="message-bottle-page">
+      <h1>🍾 Message in a Bottle 🍾</h1>
+      <p>A secret message waiting for you on your next Diwali birthday! 🎆</p>
+      
+      <div class="bottle-container">
+        <div class="bottle" id="message-bottle" onclick="tryOpenBottle()">
+          <div class="bottle-emoji">🍾</div>
+          <div class="bottle-note">📜</div>
+        </div>
+        <p class="bottle-hint">Click the bottle to see if it's time to open it!</p>
+        <div id="bottle-countdown" class="bottle-countdown"></div>
+      </div>
+      
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('download-memories-page')">Next ➡️</button>
+      </div>
+    </div>
+
+   <!-- 15. Download Memories Page -->
+    <div class="page" id="download-memories-page">
+      <h1>💾 Save Your Memories 💾</h1>
+      <p>Download and keep these special moments forever! 📥</p>
+      
+      <div class="download-options">
+        <div class="download-card" onclick="takeAutoScreenshot()">
+          <div class="download-icon">📸</div>
+          <h3>Take Screenshot</h3>
+          <p>You can capture this moment and save it😊</p>
+        </div>
+        <div class="download-card" onclick="downloadCertificate()">
+          <div class="download-icon">🎓</div>
+          <h3>Download Certificate</h3>
+          <p>Your special certificate</p>
+        </div>
+        <div class="download-card" onclick="shareWebsite()">
+          <div class="download-icon">🔗</div>
+          <h3>Just your Site</h3>
+          <p>Save the link ✨</p>
+        </div>
+      </div>
+      
+      <!-- Screenshot Flash Effect -->
+      <div id="screenshot-flash" class="hidden"></div>
+      
+      <div class="special-note">
+        <h3>✨ A Special Note ✨</h3>
+        <p>Bookmark this website! It's yours forever and will remember you every year on your birthday! ✨</p>
+        <p>Next time you visit on October 21st, there will be a special surprise waiting! 🎁</p>
+      </div>
+      
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+        <button onclick="showPage('thanks-page')">Next ➡️</button>
+      </div>
+    </div>
+
+    <div class="page" id="thanks-page">
+      <div class="thank-sorry-section">
+        <h1 class="animated-title">😊 Thank You 😊</h1>
+        <p class="fade-text message-text">
+          Thank you for being such an amazing friend. Your kindness, your laughter, and your beautiful soul make every day brighter. I'm so grateful to have a friend like you in my life! 💖
+        </p>
+      </div>
+
+      <div class="thank-sorry-section">
+        <h1 class="animated-title clickable" id="sorry-reveal"> Sorry ✨<small>(click to reveal)</small></h1>
+        <p class="fade-text message-text hidden" id="sorry-message">
+         I just wanted to say I’m really sorry if I ever said or did anything that hurt you — that was never my intention. You mean a lot to me, and I’d never want to make you feel bad. You truly deserve all the happiness and good things in the world! 🌼 🌸
+        </p>
+      </div>
+
+      <div class="final-message">
+        <h2>✨ You are Best ✨</h2>
+        <p>Always and forever 😊</p>
+      </div>
+      
+      <div class="nav">
+        <button onclick="goBack()">⬅️ Back</button>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
